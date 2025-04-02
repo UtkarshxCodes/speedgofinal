@@ -12,30 +12,10 @@ export const metadata: Metadata = {
     generator: 'v0.dev'
 }
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode
-}>) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <head>
-        {/* Add gomaps.pro script */}
-        <script
-          src="https://maps.gomaps.pro/maps/api/js?key=AlzaSy2UWMtgWKm4VZHJ5LPlSHv4Jh-0475581V&libraries=places,geometry"
-          async
-          defer
-        ></script>
-      </head>
-      <body className={inter.className}>
-        <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
-          {children}
-        </ThemeProvider>
-      </body>
+    <html lang="en" className="light" style={{ colorScheme: "light" }}>
+      <body>{children}</body>
     </html>
-  )
+  );
 }
-
-
-
-import './globals.css'

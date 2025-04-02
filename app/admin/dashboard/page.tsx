@@ -9,6 +9,7 @@ import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Navigation, Search, Users, Car, DollarSign, BarChart } from "lucide-react"
+import Image from "next/image"
 
 export default function AdminDashboard() {
   const [searchTerm, setSearchTerm] = useState("")
@@ -359,6 +360,43 @@ export default function AdminDashboard() {
             </TabsContent>
           </Tabs>
         </div>
+        <Image
+          src="/images/speedgo.png" // Path to the speedgo.png image
+          width={500}
+          height={500}
+          alt="SpeedGo Logo"
+          className="mx-auto aspect-square rounded-xl object-cover"
+        />
+        <p className="text-xs text-muted-foreground">© 2025 Speed Go. All rights reserved.</p>
+        <Button asChild size="lg">
+          <Link href="/login">Book a Ride</Link>
+        </Button>
+        <Card>
+          <CardHeader>
+            <CardTitle>Book a Ride</CardTitle>
+            <CardDescription>Enter your pickup and drop-off locations</CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div className="space-y-2">
+              <Label htmlFor="pickup">Pickup Location</Label>
+              <LocationSearch
+                id="pickup"
+                placeholder="Enter pickup location"
+                value={pickupLocation}
+                onChange={(value) => handleLocationSelect("pickup", value)}
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="drop">Drop Location</Label>
+              <LocationSearch
+                id="drop"
+                placeholder="Enter drop location"
+                value={dropLocation}
+                onChange={(value) => handleLocationSelect("drop", value)}
+              />
+            </div>
+          </CardContent>
+        </Card>
       </main>
     </div>
   )

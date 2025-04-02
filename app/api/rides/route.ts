@@ -9,9 +9,6 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Missing required fields" }, { status: 400 })
     }
 
-    // In a real app, you would save the ride to your database
-    // and find a nearby captain
-
     // Mock response
     const mockRide = {
       id: `ride_${Date.now()}`,
@@ -44,10 +41,8 @@ export async function GET(request: Request) {
     return NextResponse.json({ error: "User ID is required" }, { status: 400 })
   }
 
-  // In a real app, you would fetch rides from your database
-
   // Mock rides data
-  const mockRides = [
+  const rides = [
     {
       id: "ride_1",
       userId,
@@ -60,20 +55,8 @@ export async function GET(request: Request) {
       status: "completed",
       createdAt: "2023-06-15T10:30:00Z",
     },
-    {
-      id: "ride_2",
-      userId,
-      pickupLocation: "Hauz Khas, New Delhi",
-      dropLocation: "Saket, New Delhi",
-      vehicleType: "bike",
-      fare: 80,
-      distance: 4.1,
-      duration: 15,
-      status: "completed",
-      createdAt: "2023-06-14T15:45:00Z",
-    },
   ]
 
-  return NextResponse.json({ rides: mockRides })
+  return NextResponse.json({ rides })
 }
 

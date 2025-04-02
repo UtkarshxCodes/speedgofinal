@@ -1,7 +1,8 @@
 "use client"
 
+import { useEffect, useState } from "react"
 import { Card, CardContent } from "@/components/ui/card"
-import { MapPin, Clock, Car, Bike } from "lucide-react"
+import { MapPin } from "lucide-react"
 
 interface RideConfirmationProps {
   pickupLocation: string
@@ -20,6 +21,30 @@ export function RideConfirmation({
   distance,
   duration,
 }: RideConfirmationProps) {
+  const [directions, setDirections] = useState<any>(null)
+
+  useEffect(() => {
+    const fetchDirections = async () => {
+      try {
+        const response = await fetch(
+          `/api/maps/directions?origin=${encodeURIComponent(
+            pickupLocation
+          )}&destination=${encodeURIComponent(dropLocation)}`
+        )
+        const data = await response.json()
+        if (response.ok) {
+          setDirections(data)
+        } else {
+          console.error("Error fetching directions:", data.error)
+        }
+      } catch (error) {
+        console.error("Error fetching directions:", error)
+      }
+    }
+
+    fetchDirections()
+  }, [pickupLocation, dropLocation])
+
   return (
     <div className="space-y-4">
       <div className="space-y-2">
@@ -59,6 +84,19 @@ export function RideConfirmation({
           </div>
         </CardContent>
       </Card>
+
+      {directions && (
+        <div className="mt-4">
+          <h3 className="text-lg font-medium">Directions</h3>
+          <ul className="list-disc pl-5">
+            {directions.routes[0].legs[0].steps.map((step: any, index: number) => (
+              <li key={index} className="text-sm">
+                {step.html_instructions.replace(/<[^>]+>/g, "")} - {step.distance.text}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </div>
   )
 }

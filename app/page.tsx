@@ -73,10 +73,10 @@ export default function Home() {
               </div>
               <div className="mx-auto w-full max-w-[500px] relative">
                 <Image
-                  src="/placeholder.svg?height=500&width=500"
+                  src="/images/speedgo.png" // Path to the speedgo.png image
                   width={500}
                   height={500}
-                  alt="Ride booking app"
+                  alt="SpeedGo Logo"
                   className="mx-auto aspect-square rounded-xl object-cover"
                 />
               </div>
@@ -203,11 +203,11 @@ export default function Home() {
               </div>
               <div className="mx-auto w-full max-w-[500px]">
                 <Image
-                  src="/placeholder.svg?height=400&width=500"
+                  src="/images/speedgo.png" // Path to the speedgo.png image
                   width={500}
                   height={400}
-                  alt="About our company"
-                  className="mx-auto rounded-xl object-cover"
+                  alt="SpeedGo Mission"
+                  className="mx-auto rounded-xl object-cover w-full h-auto" // Added responsive classes
                 />
               </div>
             </div>
