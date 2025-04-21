@@ -10,9 +10,17 @@ import { Badge } from "@/components/ui/badge"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Navigation, Search, Users, Car, DollarSign, BarChart } from "lucide-react"
 import Image from "next/image"
+import { Label } from "@/components/ui/label";
+
+const API_KEY = "AlzaSyVOaTb7Ok3d_VyeuQ-eOoxbvaqMcm32Sgp";
 
 export default function AdminDashboard() {
   const [searchTerm, setSearchTerm] = useState("")
+
+  // Define the handleClick function
+  const handleClick = () => {
+    console.log("Main container clicked!");
+  };
 
   // Mock data for demonstration
   const users = [
@@ -167,7 +175,7 @@ export default function AdminDashboard() {
           </div>
         </div>
       </header>
-      <main className="flex-1 container mx-auto px-4 py-6">
+      <main onClick={handleClick} className="flex-1 container mx-auto px-4 py-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
@@ -281,9 +289,23 @@ export default function AdminDashboard() {
                         <Badge variant={captain.status === "active" ? "default" : "secondary"}>{captain.status}</Badge>
                       </TableCell>
                       <TableCell>
-                        <Button variant="ghost" size="sm" asChild>
-                          <Link href={`/admin/captains/${captain.id}`}>View</Link>
-                        </Button>
+                        <div className="flex space-x-2">
+                          <Button variant="outline" className="flex-1" asChild>
+                            <Link href={`https://wa.me/${captain.phone}`} target="_blank" rel="noopener noreferrer">
+                              Call
+                            </Link>
+                          </Button>
+
+                          <Button variant="outline" className="flex-1" asChild>
+                            <Link
+                              href={`https://wa.me/${7302275542}?text=Hello%20${captain.name},%20I%20would%20like%20to%20discuss%20my%20ride.`}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
+                              Message
+                            </Link>
+                          </Button>
+                        </div>
                       </TableCell>
                     </TableRow>
                   ))}
@@ -379,20 +401,20 @@ export default function AdminDashboard() {
           <CardContent className="space-y-4">
             <div className="space-y-2">
               <Label htmlFor="pickup">Pickup Location</Label>
-              <LocationSearch
+              <Input
                 id="pickup"
                 placeholder="Enter pickup location"
-                value={pickupLocation}
-                onChange={(value) => handleLocationSelect("pickup", value)}
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
               />
             </div>
             <div className="space-y-2">
               <Label htmlFor="drop">Drop Location</Label>
-              <LocationSearch
+              <Input
                 id="drop"
                 placeholder="Enter drop location"
-                value={dropLocation}
-                onChange={(value) => handleLocationSelect("drop", value)}
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
               />
             </div>
           </CardContent>

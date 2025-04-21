@@ -233,3 +233,29 @@ export default function LoginPage() {
   )
 }
 
+export function AdminDashboard() {
+  const handleClick = () => {
+    console.log("Main container clicked!");
+  };
+
+  return (
+    <div className="min-h-screen flex flex-col">
+      <header className="border-b">
+        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
+          <div className="flex items-center space-x-4">
+            <Button variant="ghost" size="sm" asChild>
+              <Link href="/admin/settings">Settings</Link>
+            </Button>
+            <Button variant="outline" size="sm" asChild>
+              <Link href="/logout">Logout</Link>
+            </Button>
+          </div>
+        </div>
+      </header>
+      <main className="flex-1 container mx-auto px-4 py-6">
+        {/* Your content here */}
+      </main>
+    </div>
+  );
+}
+
